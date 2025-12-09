@@ -28,7 +28,7 @@
 }*/
 // bottom up 
 
-/*class Solution {
+/*&class Solution {
     public int rob(int[] nums) {
         int n = nums.length;
         if (n == 0) 
@@ -44,15 +44,15 @@
 
        
         for (int i = 2; i < n; i++) {
-            dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
+            dp[i] = Math.max(dp[i-1], nums[i] + dp[i -2]);
         }
 
         
-        return dp[n - 1];
+        return dp[ n-1 ];
     }
-}*/
+}
 
-class Solution {
+/*class Solution {
     public int rob(int[] nums) {
         int n = nums.length;
         if (n == 0) return 0;
@@ -69,4 +69,47 @@ class Solution {
 
         return p1;
     }
+}*/
+
+/*class Solution {
+    public int rob(int[] nums) {
+        return solve(nums, 0);
+    }
+
+    private int solve(int[] nums, int i) {
+        
+        if (i >= nums.length) return 0;
+
+       
+        int take = nums[i] + solve(nums, i + 2);
+
+     
+        int skip = solve(nums, i + 1);
+
+        
+        return Math.max(take, skip);
+    }
+}*/
+
+
+class Solution {
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if (n == 0) 
+        return 0;
+        if (n == 1) 
+        return nums[0];
+
+        int[] dp = new int[n+2];
+
+      
+        
+       
+        for (int i = 0;  i <n; i++) {
+            dp[i+1] = Math.max(dp[i+1], dp[i]);
+
+            dp[i+2] = Math.max(dp[i+2] , nums[i] +dp[i]);
+        }
+        return Math.max(dp[n], dp[n+1]);
+}
 }
